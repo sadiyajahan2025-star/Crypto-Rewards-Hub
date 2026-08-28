@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Rewards Hub</title>
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Adsgram SDK -->
+    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #333333;
+            padding: 28px 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+        }
+        .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0088cc;
+            margin-bottom: 8px;
+        }
+        p {
+            font-size: 14px;
+            color: #aaaaaa;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+        .btn {
+            background: linear-gradient(135deg, #0088cc, #005588);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: transform 0.1s ease, background 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .status {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #28a745;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="icon">🪙</div>
+        <h2>Crypto Rewards Hub</h2>
+        <p>Watch a short video ad to claim 100 Reward Points instantly!</p>
+        
+        <button class="btn" onclick="watchAd()">🎬 Watch Ad & Claim</button>
+        <div id="statusMsg" class="status"></div>
+    </div>
+
+    <script>
+        // Telegram WebApp Initialization
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+            window.Telegram.WebApp.expand();
+        }
+
+        // Adsgram Block ID Initialization
+        // Replace "YOUR_BLOCK_ID" with your actual Adsgram Block ID later
+        const BLOCK_ID = "YOUR_BLOCK_ID";
+        
+        let AdController = null;
+        if (window.Adsgram) {
+            AdController = window.Adsgram.init({ blockId: BLOCK_ID });
+        }
+
+        function watchAd() {
+            const statusDiv = document.getElementById("statusMsg");
+            
+            if (!AdController || BLOCK_ID === "YOUR_BLOCK_ID") {
+                alert("Adsgram Block ID is not configured yet. Please update YOUR_BLOCK_ID in index.html.");
+                return;
+            }
+
+            AdController.show().then((result) => {
+                statusDiv.style.display = "block";
+                statusDiv.innerText = "🎉 Success! 100 Points added to your account.";
+                alert("Congratulations! You earned 100 Reward Points.");
+            }).catch((result) => {
+                alert("Ad was skipped or failed to load. Try again!");
+            });
+        }
+    </script>
+</body>
+</html>
