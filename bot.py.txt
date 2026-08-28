@@ -1,7 +1,7 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"  # BotFather থেকে পাওয়া API Token বসান
+TOKEN = "8948008383:AAGQvBEXoMrYLC_fJ7why1P6wTWtkNLhb5s"  # BotFather থেকে পাওয়া API Token বসান
 MINI_APP_URL = "https://sadiyajahan2025-star.github.io/Crypto-Rewards-Hub/"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
