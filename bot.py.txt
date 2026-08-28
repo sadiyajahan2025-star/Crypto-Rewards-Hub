@@ -1,0 +1,22 @@
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+
+TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"  # BotFather থেকে পাওয়া API Token বসান
+MINI_APP_URL = "https://sadiyajahan2025-star.github.io/Crypto-Rewards-Hub/"
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [InlineKeyboardButton(text="🚀 Launch Mini App", web_app=WebAppInfo(url=MINI_APP_URL))]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    await update.message.reply_text(
+        "Welcome to Crypto Rewards Hub! Click below to start earning:",
+        reply_markup=reply_markup
+    )
+
+if __name__ == '__main__':
+    app = ApplicationBuilder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    print("Bot is running...")
+    app.run_polling()
