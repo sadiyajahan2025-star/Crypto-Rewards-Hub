@@ -1,22 +1,47 @@
+import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN = "8948008383:AAGQvBEXoMrYLC_fJ7why1P6wTWtkNLhb5s"  # BotFather থেকে পাওয়া API Token বসান
+# Logging Config
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+
+# Configuration
+TOKEN = "8598188290:AAFvfUKl4Ge6K_sE4LVzcNEVCKrcG6VLYvE"
 MINI_APP_URL = "https://sadiyajahan2025-star.github.io/Crypto-Rewards-Hub/"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user = update.effective_user
+    welcome_text = (
+        f"👋 Hello {user.first_name}!\n\n"
+        "Welcome to **Crypto Rewards Hub**! 🪙\n\n"
+        "Watch short ads, earn instant reward points, and boost your balance.\n"
+        "Click the button below to launch the Mini App:"
+    )
+    
+    # Inline Button with WebApp Info
     keyboard = [
-        [InlineKeyboardButton(text="🚀 Launch Mini App", web_app=WebAppInfo(url=MINI_APP_URL))]
+        [InlineKeyboardButton(text="🚀 Launch Crypto Rewards", web_app=WebAppInfo(url=MINI_APP_URL))]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     
     await update.message.reply_text(
-        "Welcome to Crypto Rewards Hub! Click below to start earning:",
-        reply_markup=reply_markup
+        text=welcome_text,
+        reply_markup=reply_markup,
+        parse_mode="Markdown"
     )
 
-if __name__ == '__main__':
+def main():
+    print("Starting bot...")
     app = ApplicationBuilder().token(TOKEN).build()
+    
+    # Register handlers
     app.add_handler(CommandHandler("start", start))
-    print("Bot is running...")
+    
+    print("✅ Bot is online and running! Press Ctrl+C to stop.")
     app.run_polling()
+
+if __name__ == '__main__':
+    main()
