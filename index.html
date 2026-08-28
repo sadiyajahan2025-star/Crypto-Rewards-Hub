@@ -91,12 +91,13 @@
             window.Telegram.WebApp.expand();
         }
 
-        // Adsgram Block ID Configured
+        // Adsgram Block ID with Debug Mode Enabled
         const BLOCK_ID = "44931";
         
         let AdController = null;
         if (window.Adsgram) {
-            AdController = window.Adsgram.init({ blockId: BLOCK_ID });
+            // debug: true যুক্ত করা হয়েছে টেস্ট বিজ্ঞাপনের জন্য
+            AdController = window.Adsgram.init({ blockId: BLOCK_ID, debug: true });
         }
 
         function watchAd() {
