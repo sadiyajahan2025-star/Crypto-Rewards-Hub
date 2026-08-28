@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -92,9 +91,8 @@
             window.Telegram.WebApp.expand();
         }
 
-        // Adsgram Block ID Initialization
-        // Replace "44931" with your actual Adsgram Block ID later
-        const BLOCK_ID = "YOUR_BLOCK_ID";
+        // Adsgram Block ID Configured
+        const BLOCK_ID = "44931";
         
         let AdController = null;
         if (window.Adsgram) {
@@ -104,8 +102,8 @@
         function watchAd() {
             const statusDiv = document.getElementById("statusMsg");
             
-            if (!AdController || BLOCK_ID === "YOUR_BLOCK_ID") {
-                alert("Adsgram Block ID is not configured yet. Please update YOUR_BLOCK_ID in index.html.");
+            if (!AdController) {
+                alert("Adsgram SDK failed to load. Please try again.");
                 return;
             }
 
